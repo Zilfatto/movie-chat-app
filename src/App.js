@@ -1,24 +1,20 @@
-import logo from './logo.svg';
+import Movies from '../src/components/Movies';
+import { Layout } from 'antd';
+
 import './App.css';
+import 'antd/dist/antd.css';
+
 
 function App() {
+  const { Content } = Layout;
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <main className="App">
+      <Layout className="mainLayout">
+        <Content>
+            <Movies />
+        </Content>
+      </Layout>
+    </main>
   );
 }
 
