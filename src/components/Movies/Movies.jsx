@@ -1,72 +1,44 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import { getMovies } from '../../services/movieService';
+import {
+    extractGenresFromMovies,
+    constructColumnsForMoviesTable,
+    mapMoviesToTableStructure
+} from '../../utils/movies';
 import { Table } from 'antd';
 import './Movies.css';
 
 function Movies() {
-    const columns = [
-        {
-            title: 'Title',
-            dataIndex: 'title',
-            key: 'title',
-        },
-        {
-            title: 'Year',
-            dataIndex: 'year',
-            key: 'year',
-        },
-        {
-            title: 'Runtime',
-            dataIndex: 'runtime',
-            key: 'runtime',
-        },
-        {
-            title: 'Revenue',
-            dataIndex: 'revenue',
-            key: 'revenue',
-        },
-        {
-            title: 'Rating',
-            dataIndex: 'rating',
-            key: 'rating',
-        },
-        {
-            title: 'Genres',
-            dataIndex: 'genres',
-            key: 'genres',
-        }
-    ];
+    // Setting state variables
+    const [movies, setMovies] = useState([]);
+    const [genres, setGenres] = useState([]);
+    // For showing or hiding a loader of movies table
+    const [moviesAreLoading, setMoviesAreLoading] = useState(true);
 
+    // Request movies from an EndPoint and put them to state
+    async function fetchMovies() {
+        const response = await getMovies();
+        const movies = response.data;
 
-    // Mocking rows data
-    const dataSource = [
-        {
-            key: 1,
-            title: 'Fantastic movie',
-            year: 2000,
-            runtime: '1h 30m',
-            revenue: 600000,
-            rating: 5.6,
-            genres: 'Genre3'
-        },
-        {
-            key: 1,
-            title: 'Game changer',
-            year: 1010,
-            runtime: '34m',
-            revenue: 1000000,
-            rating: 9.9,
-            genres: 'Genre1'
-        },
-        {
-            key: 1,
-            title: 'One chance',
-            year: 1999,
-            runtime: '1h',
-            revenue: 50000,
-            rating: 5.0,
-            genres: 'Genre6'
-        },
-    ];
+        // In the real World we would have a separate API for genres
+        // But in this case we need to extract them from requested movies
+        const genres = extractGenresFromMovies(movies);
+        setMovies(movies);
+        setGenres(genres);
+        // Hide a loader over the movies table
+        setMoviesAreLoading(false);
+    }
+
+    // Fetch all the needed data
+    useEffect(() => {
+        fetchMovies();
+    }, []);
+
+    // Create columns for the table
+    const columns = constructColumnsForMoviesTable();
+
+    // Extracting data for rows from movies
+    const dataSource = mapMoviesToTableStructure(movies);
 
     return (
         <section className={'movies-container'}>
@@ -74,6 +46,7 @@ function Movies() {
                 columns={columns}
                 dataSource={dataSource}
                 pagination={false}
+                loading={moviesAreLoading}
             />
         </section>
     );
