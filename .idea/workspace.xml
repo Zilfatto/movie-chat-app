@@ -2,14 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="6445e9e0-bb0f-4056-95b9-f7837ae903ed" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/config.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/services/httpService.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/services/movieService.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/utils/movies.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/public/index.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/Movies/Movies.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Movies/Movies.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/utils/movies.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/utils/movies.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -57,7 +53,8 @@
       <workItem from="1614229983046" duration="7013000" />
       <workItem from="1614240932454" duration="2390000" />
       <workItem from="1614250132786" duration="6319000" />
-      <workItem from="1614309311547" duration="223000" />
+      <workItem from="1614309311547" duration="8315000" />
+      <workItem from="1614324019340" duration="1867000" />
     </task>
     <servers />
   </component>

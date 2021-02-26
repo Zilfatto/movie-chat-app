@@ -3,15 +3,21 @@ import { getMovies } from '../../services/movieService';
 import {
     extractGenresFromMovies,
     constructColumnsForMoviesTable,
-    mapMoviesToTableStructure
+    mapMoviesToTableStructure,
+    addMoviesTableFilterFeatures,
+    createSearchField,
+    createGenreSelectionField
 } from '../../utils/movies';
 import { Table } from 'antd';
 import './Movies.css';
 
 function Movies() {
-    // Setting state variables
+    // Initialize state variables
     const [movies, setMovies] = useState([]);
     const [genres, setGenres] = useState([]);
+    // Filter fields variables
+    const [searchByTitle, setSearchByTitle] = useState('');
+    const [selectedGenre, setSelectedGenre] = useState('');
     // For showing or hiding a loader of movies table
     const [moviesAreLoading, setMoviesAreLoading] = useState(true);
 
@@ -25,6 +31,7 @@ function Movies() {
         const genres = extractGenresFromMovies(movies);
         setMovies(movies);
         setGenres(genres);
+
         // Hide a loader over the movies table
         setMoviesAreLoading(false);
     }
@@ -34,11 +41,28 @@ function Movies() {
         fetchMovies();
     }, []);
 
+    // Handle new genre selection
+    function handleSelectedGenreChange(value) {
+        setSelectedGenre(value);
+    }
+
+    // Handle genre search
+    function handleSearchByTitleChange(e) {
+        setSearchByTitle(e.target.value);
+    }
+
     // Create columns for the table
     const columns = constructColumnsForMoviesTable();
 
     // Extracting data for rows from movies
-    const dataSource = mapMoviesToTableStructure(movies);
+    const dataSource = mapMoviesToTableStructure(movies, { searchByTitle, selectedGenre });
+
+    // Create fields for filtering movies
+    const searchField = createSearchField(searchByTitle, handleSearchByTitleChange, 'Title');
+    const genreSelectionField = createGenreSelectionField(selectedGenre, handleSelectedGenreChange, genres);
+
+    // Add filter features to the table
+    addMoviesTableFilterFeatures(dataSource, searchField, genreSelectionField);
 
     return (
         <section className={'movies-container'}>
