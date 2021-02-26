@@ -1,0 +1,79 @@
+.comments-view {
+    background-color: #f1f1f1;
+    pointer-events: auto;
+    border-radius: 3px;
+}
+
+.comments-header,
+.comments-container,
+.comments-footer,
+.comment {
+    display: flex;
+}
+
+.comments-header {
+    background-color: #4747d1;
+    padding: 15px 10px;
+    flex-flow: row wrap;
+    align-items: center;
+    font-size: 16px;
+    border-radius: 3px 3px 0 0;
+}
+
+.comments-header .comments-return-btn {
+    background-color: inherit;
+    outline: none;
+    border: none;
+    cursor: pointer;
+    color: white;
+}
+
+.comments-return-btn .fa-arrow-left {
+    font-size: 24px;
+}
+
+.comments-header .comments-header-text {
+    color: white;
+    margin: 0 0 5px 9px;
+}
+
+.comments-container {
+    padding: 20px 20px 20px 10px;
+    flex-direction: column;
+    min-height: 300px;
+    overflow-y: auto;
+}
+
+.comments-container .comment {
+    flex-flow: row wrap;
+    align-items: center;
+    margin: 5px 0;
+}
+
+.comment .user-icon {
+    display: inline-block;
+    background-color: #4747d1;
+    padding: 16px;
+    border-radius: 50%;
+    margin-right: 8px;
+}
+
+.comment .content {
+    background-color: #4747d1;
+    color: white;
+    margin: 0;
+    padding: 6px;
+    font-size: 13px;
+    border-radius: 3px;
+}
+
+.comments-footer {
+    background-color: white;
+    padding: 8px;
+
+}
+
+.comments-footer .comments-send-btn {
+    background-color: #4747d1;
+    color: white;
+}

@@ -9,6 +9,7 @@ import {
     createGenreSelectionField
 } from '../../utils/movies';
 import { Table } from 'antd';
+import Comments from '../Comments';
 import './Movies.css';
 
 function Movies() {
@@ -20,6 +21,7 @@ function Movies() {
     const [selectedGenre, setSelectedGenre] = useState('');
     // For showing or hiding a loader of movies table
     const [moviesAreLoading, setMoviesAreLoading] = useState(true);
+    const [commentsAreVisible, setCommentsAreVisible] = useState(false);
 
     // Request movies from an EndPoint and put them to state
     async function fetchMovies() {
@@ -51,6 +53,20 @@ function Movies() {
         setSearchByTitle(e.target.value);
     }
 
+    // Handle row click in the movies table
+    function handleMovieRowClick(movie, rowIndex) {
+        // Ignore a row with filter features
+        if (rowIndex === 0) {
+            return;
+        }
+
+        setCommentsAreVisible(true);
+    }
+
+    function handleCommentsModalClose() {
+        setCommentsAreVisible(false);
+    }
+
     // Create columns for the table
     const columns = constructColumnsForMoviesTable();
 
@@ -65,12 +81,22 @@ function Movies() {
     addMoviesTableFilterFeatures(dataSource, searchField, genreSelectionField);
 
     return (
-        <section className={'movies-container'}>
+        <section className='movies-container'>
             <Table
                 columns={columns}
                 dataSource={dataSource}
-                pagination={false}
+                pagination={{ position: ['bottomCenter'], total: dataSource.length, defaultCurrent: 1, pageSize: 20 }}
                 loading={moviesAreLoading}
+                onRow={(record, rowIndex) => {
+                    return {
+                        onClick: () => handleMovieRowClick(record, rowIndex)
+                    }
+                }}
+            />
+            <Comments
+                title={'Comments +++ here i need to add movie Title, but how?'}
+                visible={commentsAreVisible}
+                onModalClose={handleCommentsModalClose}
             />
         </section>
     );

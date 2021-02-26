@@ -95,14 +95,14 @@ export function mapMoviesToTableStructure(
     });
 }
 
-// Insert a row with filter features to a table
+// Insert a row with filter features to the table
 export function addMoviesTableFilterFeatures(rows = [], search = '', genresSelection = '') {
     const tableFiltersRow = {
         key: -1,
         title: search,
         genre: genresSelection
     };
-    // Insert a row at the very top of a table
+    // Insert a row at the very top of the table
     rows.unshift(tableFiltersRow);
 }
 

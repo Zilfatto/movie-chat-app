@@ -2,7 +2,14 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="6445e9e0-bb0f-4056-95b9-f7837ae903ed" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/src/components/Comments/Comments.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/Comments/Comments.jsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/Comments/index.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/Comments/views/CommentsModalView.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/Comments/views/CommentsModalView.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/public/index.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/Movies/Movies.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Movies/Movies.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/utils/movies.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/utils/movies.js" afterDir="false" />
@@ -20,6 +27,7 @@
       <list>
         <option value="tsconfig.json" />
         <option value="JavaScript File" />
+        <option value="CSS File" />
       </list>
     </option>
   </component>
@@ -36,6 +44,7 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="list.type.of.created.stylesheet" value="CSS" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
@@ -54,7 +63,8 @@
       <workItem from="1614240932454" duration="2390000" />
       <workItem from="1614250132786" duration="6319000" />
       <workItem from="1614309311547" duration="8315000" />
-      <workItem from="1614324019340" duration="1867000" />
+      <workItem from="1614324019340" duration="12651000" />
+      <workItem from="1614338309869" duration="4884000" />
     </task>
     <servers />
   </component>
