@@ -10,7 +10,7 @@ import {
 } from '../../utils/movies';
 import { Table } from 'antd';
 import Comments from '../Comments';
-import './Movies.css';
+import './Movies.scss';
 
 function Movies() {
     // Initialize state variables
@@ -18,9 +18,12 @@ function Movies() {
     const [genres, setGenres] = useState([]);
     // Filter fields variables
     const [searchByTitle, setSearchByTitle] = useState('');
-    const [selectedGenre, setSelectedGenre] = useState('');
+    const [selectedGenreFilter, setSelectedGenreFilter] = useState('');
     // For showing or hiding a loader of movies table
     const [moviesAreLoading, setMoviesAreLoading] = useState(true);
+    // A movie which was clicked in the table
+    const [selectedMovie, setSelectedMovie] = useState(null);
+    // Comments modal for a selected movie
     const [commentsAreVisible, setCommentsAreVisible] = useState(false);
 
     // Request movies from an EndPoint and put them to state
@@ -45,7 +48,7 @@ function Movies() {
 
     // Handle new genre selection
     function handleSelectedGenreChange(value) {
-        setSelectedGenre(value);
+        setSelectedGenreFilter(value);
     }
 
     // Handle genre search
@@ -60,6 +63,8 @@ function Movies() {
             return;
         }
 
+        // Update a selected movie and show its comments
+        setSelectedMovie(movie);
         setCommentsAreVisible(true);
     }
 
@@ -71,17 +76,17 @@ function Movies() {
     const columns = constructColumnsForMoviesTable();
 
     // Extracting data for rows from movies
-    const dataSource = mapMoviesToTableStructure(movies, { searchByTitle, selectedGenre });
+    const dataSource = mapMoviesToTableStructure(movies, { searchByTitle, selectedGenreFilter });
 
     // Create fields for filtering movies
     const searchField = createSearchField(searchByTitle, handleSearchByTitleChange, 'Title');
-    const genreSelectionField = createGenreSelectionField(selectedGenre, handleSelectedGenreChange, genres);
+    const genreSelectionField = createGenreSelectionField(selectedGenreFilter, handleSelectedGenreChange, genres);
 
     // Add filter features to the table
     addMoviesTableFilterFeatures(dataSource, searchField, genreSelectionField);
 
     return (
-        <section className='movies-container'>
+        <section className='Movies'>
             <Table
                 columns={columns}
                 dataSource={dataSource}
@@ -94,8 +99,9 @@ function Movies() {
                 }}
             />
             <Comments
-                title={'Comments +++ here i need to add movie Title, but how?'}
+                title={`${selectedMovie?.title} Comments`}
                 visible={commentsAreVisible}
+                movie={selectedMovie}
                 onModalClose={handleCommentsModalClose}
             />
         </section>

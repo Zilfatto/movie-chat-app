@@ -63,18 +63,12 @@ export function constructColumnsForMoviesTable() {
 // Extracting data for rows from movies
 export function mapMoviesToTableStructure(
     movies = [],
-    filters = { searchByTitle: '', selectedGenre: '' }
+    filters = { searchByTitle: '', selectedGenreFilter: '' }
     ) {
 
-    // Filters values
-    const { searchByTitle, selectedGenre } = filters;
     // If at least one of two filters are used, then apply them
-    if (searchByTitle || selectedGenre) {
-        movies = movies.filter(movie => {
-            // Check whether each filter is provided, if so, apply it
-            return (!searchByTitle || movie.title.toLowerCase().startsWith(searchByTitle.toLowerCase()))
-                && (!selectedGenre || movie.genre.find(genre => genre === selectedGenre));
-        });
+    if (filters.searchByTitle || filters.selectedGenreFilter) {
+        movies = filterMovies(movies, filters);
     }
 
     // Return movies data according to the table structure
@@ -82,8 +76,10 @@ export function mapMoviesToTableStructure(
         // Extract needed data from a movie
         const { title, year, runtime, revenue, rating, genre } = movie;
 
+        // TODO extract movie ID and put it here
         // Return object with properties for each column
         return {
+            movieId: 'movieId',
             key: index,
             title,
             year,
@@ -95,10 +91,21 @@ export function mapMoviesToTableStructure(
     });
 }
 
+// Apply specified filters to movies
+function filterMovies(movies, filters) {
+    // Filter values
+    const { searchByTitle, selectedGenreFilter } = filters;
+    return movies.filter(movie => {
+        // Check whether each filter is provided, if so, apply it
+        return (!searchByTitle || movie.title.toLowerCase().startsWith(searchByTitle.toLowerCase()))
+            && (!selectedGenreFilter || movie.genre.find(genre => genre === selectedGenreFilter));
+    });
+}
+
 // Insert a row with filter features to the table
 export function addMoviesTableFilterFeatures(rows = [], search = '', genresSelection = '') {
     const tableFiltersRow = {
-        key: -1,
+        key: Number.MIN_VALUE,
         title: search,
         genre: genresSelection
     };

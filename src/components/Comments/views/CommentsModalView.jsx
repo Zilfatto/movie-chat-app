@@ -1,34 +1,43 @@
 import React from 'react';
 import { Input, Button } from 'antd';
-import './CommentsModalView.css';
+import { SendOutlined, ArrowLeftOutlined } from '@ant-design/icons';
+import './CommentsModalView.scss';
 
 function CommentsModalView(props) {
-    const comments = [
-        { id: 1, content: 'I hate it' },
-        { id: 2, content: 'Not bad but I wish it was longer. 2h is too short!' },
-        { id: 3, content: 'Hello 2' }
-    ];
-
     return (
-        <div className={'comments-view'}>
-            <section className='comments-header'>
-                <button type='button' className='comments-return-btn'>
-                    <i className='fas fa-arrow-left'></i>
+        <div className={'Comments-view'}>
+            <section className='Comments-view__header'>
+                <button
+                    type='button'
+                    onClick={props.onModalClose}
+                    className='Comments-view__return-btn'
+                >
+                    <ArrowLeftOutlined />
                 </button>
-                <p className='comments-header-text'>Pro Comments</p>
+                <p className='Comments-view__header-text'>{props.title}</p>
             </section>
-            <section className='comments-container'>
-                {comments.map(comment => (
-                    <div key={comment.id} className='comment'>
-                        <span className='user-icon'></span>
-                        <p className='content'>{comment.content}</p>
+            <section className='Comments-view__container'>
+                {props.comments.map(comment => (
+                    <div key={comment.id} className='Comment'>
+                        <span className='Comment__user-icon'></span>
+                        <p className='Comment__content'>{comment.content}</p>
                     </div>
                 ))}
             </section>
-            <section className='comments-footer'>
-                <Input className='comment-input' placeholder={'...'} />
-                <Button className='comments-send-btn'>
-                    <i className='fas fa-angle-double-right'></i>
+            <section className='Comments-view__footer'>
+                <Input
+                    className='Comments-view__input'
+                    bordered={false}
+                    placeholder={'Type smth ...'}
+                    value={props.commentInputValue}
+                    onChange={props.onCommentInputChange}
+                />
+                <Button
+                    loading={props.commentsAreLoading}
+                    className='Send-btn'
+                    onClick={props.onCommentAdd}
+                >
+                    <SendOutlined />
                 </Button>
             </section>
         </div>
