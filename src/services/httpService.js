@@ -1,6 +1,7 @@
 import axios from 'axios';
 import { notification } from 'antd';
 
+// Currently this service does not have any uses, but I left it for future purposes
 axios.interceptors.response.use(null, error => {
     const expectedError =
         error.response &&

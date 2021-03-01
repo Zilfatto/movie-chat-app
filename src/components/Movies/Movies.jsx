@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { getMovies } from '../../services/movieService';
+import { getMovies, updateMovie } from '../../services/movieService';
+import _cloneDeep from 'lodash-es/cloneDeep';
 import {
     extractGenresFromMovies,
     constructColumnsForMoviesTable,
@@ -8,8 +9,9 @@ import {
     createSearchField,
     createGenreSelectionField
 } from '../../utils/movies';
-import { Table } from 'antd';
+import { entityExists } from "../../utils/common";
 import Comments from '../Comments';
+import { Table, notification } from 'antd';
 import './Movies.scss';
 
 function Movies() {
@@ -26,19 +28,24 @@ function Movies() {
     // Comments modal for a selected movie
     const [commentsAreVisible, setCommentsAreVisible] = useState(false);
 
-    // Request movies from an EndPoint and put them to state
+    // Request movies from the Firebase and put them to state
     async function fetchMovies() {
-        const response = await getMovies();
-        const movies = response.data;
+        try {
+            const movies = await getMovies();
+            // In the real World we would have a separate API for genres
+            // But in this case we need to extract them from requested movies
+            const genres = extractGenresFromMovies(movies);
 
-        // In the real World we would have a separate API for genres
-        // But in this case we need to extract them from requested movies
-        const genres = extractGenresFromMovies(movies);
-        setMovies(movies);
-        setGenres(genres);
-
-        // Hide a loader over the movies table
-        setMoviesAreLoading(false);
+            // Update data
+            setMovies(movies);
+            setGenres(genres);
+            // Hide a loader over the movies table
+            setMoviesAreLoading(false);
+        }
+        catch (error) {
+            // Hide a loader if an error occurred
+            setMoviesAreLoading(false);
+        }
     }
 
     // Fetch all the needed data
@@ -59,13 +66,42 @@ function Movies() {
     // Handle row click in the movies table
     function handleMovieRowClick(movie, rowIndex) {
         // Ignore a row with filter features
-        if (rowIndex === 0) {
+        if (!entityExists(movie.id)) {
             return;
         }
 
         // Update a selected movie and show its comments
         setSelectedMovie(movie);
         setCommentsAreVisible(true);
+    }
+
+    async function handleMovieCommentAdd(comment, movieId) {
+        const movieIndex = movies.findIndex(movie => movie.id === movieId);
+        const movieCopy = _cloneDeep(movies[movieIndex]);
+
+        // Add a comment to a movie
+        movieCopy.comments.push(comment);
+
+        // Create a new movies array for updating them
+        const shallowMoviesCopy = [...movies];
+
+        // Replace an old movie by the updated one
+        shallowMoviesCopy[movieIndex] = movieCopy;
+
+        // Update movies
+        setMovies(shallowMoviesCopy);
+
+        try {
+            // Update movie comments on the server
+            await updateMovie(movieCopy)
+        }
+        catch (error) {
+            notification.error({
+                title: `Error during saving a comment: ${error.message}`,
+                message: `Could not save your comment: ${comment.content}`,
+                placement: 'topRight'
+            });
+        }
     }
 
     function handleCommentsModalClose() {
@@ -102,6 +138,7 @@ function Movies() {
                 title={`${selectedMovie?.title} Comments`}
                 visible={commentsAreVisible}
                 movie={selectedMovie}
+                onMovieCommentAdd={handleMovieCommentAdd}
                 onModalClose={handleCommentsModalClose}
             />
         </section>

@@ -72,21 +72,21 @@ export function mapMoviesToTableStructure(
     }
 
     // Return movies data according to the table structure
-    return movies.map((movie, index) => {
+    return movies.map(movie => {
         // Extract needed data from a movie
-        const { title, year, runtime, revenue, rating, genre } = movie;
+        const { id, title, year, runtime, revenue, rating, genre, comments } = movie;
 
-        // TODO extract movie ID and put it here
         // Return object with properties for each column
         return {
-            movieId: 'movieId',
-            key: index,
+            key: id,
+            id,
             title,
             year,
             runtime,
             revenue,
             rating,
-            genre
+            genre,
+            comments
         };
     });
 }
@@ -123,8 +123,13 @@ export function createGenreSelectionField(value = '', handler = null, items = []
     const { Option } = Select;
     return (
         <Select defaultValue={value} onChange={handler} style={{ width: 200 }} >
-            <Option value={''} key={'-1'}>All</Option>
+            <Option value={''} key={Number.MIN_VALUE}>All</Option>
             {items.map((item, index) => <Option value={item} key={index} >{item}</Option>)}
         </Select>
     );
+}
+
+// Extract only movies data and add an ID to them from the snapshot
+export function normalizeMoviesQuerySnapshot(querySnapshot) {
+    return querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
 }

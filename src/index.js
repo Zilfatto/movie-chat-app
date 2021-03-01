@@ -1,8 +1,22 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
+import firebase from 'firebase/app';
+import 'firebase/firestore';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import './index.css';
+
+// My web app's Firebase configuration
+const firebaseConfig = {
+    apiKey: "AIzaSyDxZsC51VacFRAtxNkT6hSksY_BpyExlps",
+    authDomain: "movies-chat-app-f1f1f1.firebaseapp.com",
+    projectId: "movies-chat-app-f1f1f1",
+    storageBucket: "movies-chat-app-f1f1f1.appspot.com",
+    messagingSenderId: "711802877235",
+    appId: "1:711802877235:web:d9d4f2a7ec62af1de07a46"
+};
+// Initialize Firebase
+firebase.initializeApp(firebaseConfig);
 
 ReactDOM.render(
   <React.StrictMode>

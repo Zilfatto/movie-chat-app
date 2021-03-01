@@ -17,7 +17,7 @@ function CommentsModalView(props) {
                 <p className='Comments-view__header-text'>{props.title}</p>
             </section>
             <section className='Comments-view__container'>
-                {props.comments.map(comment => (
+                {props.movie.comments.map(comment => (
                     <div key={comment.id} className='Comment'>
                         <span className='Comment__user-icon'></span>
                         <p className='Comment__content'>{comment.content}</p>
@@ -33,9 +33,8 @@ function CommentsModalView(props) {
                     onChange={props.onCommentInputChange}
                 />
                 <Button
-                    loading={props.commentsAreLoading}
                     className='Send-btn'
-                    onClick={props.onCommentAdd}
+                    onClick={props.onCommentSend}
                 >
                     <SendOutlined />
                 </Button>
