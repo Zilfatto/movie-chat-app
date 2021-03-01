@@ -1,6 +1,6 @@
 # How to run the code
 
-For this you need to have Node installed and run the following command - "npm install" (if you have already unbundle received .bundle file by running "git clone").
+For this you need to have Node installed and run the following command - "npm install".
 After that you need to run the next command - "npm start".
 And that's it!
 
@@ -11,6 +11,7 @@ And that's it!
 My project is built with Create React App.
 
 I used function components in it.
+I took all movies from provided JSON file and save them on the Firebase for better interactions with them. Comments for movies are stored in movies documents in arrays (not very good, subcollections are better, but for current project it is OK).
 
 ## In my project I have different folders among which:
 * "components" which contains components themselves and their styles (SASS files). Index files are needed for more convenient importing those components.
@@ -36,12 +37,10 @@ I used function components in it.
 
 I would:
 
-## UX
+## UI/UX
 * make my project look good on mobile devices.
 * add some animations to an arrow for closing a modal and to new comments to make them appear more smoothly.
 * make notifications much prettier (Could use react-toastify, but Ant design quite a big library).
-
-## UI
 * replace added comment after it came from DB (with id) or remove it from state, if an error occurred during saving it on the server
 
 ## Data structure
