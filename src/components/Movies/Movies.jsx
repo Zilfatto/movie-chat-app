@@ -32,6 +32,7 @@ function Movies() {
     async function fetchMovies() {
         try {
             const movies = await getMovies();
+
             // In the real World we would have a separate API for genres
             // But in this case we need to extract them from requested movies
             const genres = extractGenresFromMovies(movies);
@@ -90,6 +91,8 @@ function Movies() {
 
         // Update movies
         setMovies(shallowMoviesCopy);
+        // Update a selected movie
+        setSelectedMovie(movieCopy);
 
         try {
             // Update movie comments on the server
