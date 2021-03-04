@@ -91,7 +91,7 @@ function Movies() {
 
         // Update movies
         setMovies(shallowMoviesCopy);
-        // Update a selected movie
+        // Update a selected movie for showing an added comment
         setSelectedMovie(movieCopy);
 
         try {
@@ -99,6 +99,9 @@ function Movies() {
             await updateMovie(movieCopy)
         }
         catch (error) {
+            // Roll back to previous state in case of an error
+            setMovies(movies);
+            setSelectedMovie(movies[movieIndex]);
             notification.error({
                 title: `Error during saving a comment: ${error.message}`,
                 message: `Could not save your comment: ${comment.content}`,

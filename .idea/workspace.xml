@@ -34,7 +34,7 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../../../../xampp/htdocs/st-nicholas-backend" />
     <property name="list.type.of.created.stylesheet" value="CSS" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
@@ -61,7 +61,9 @@
       <workItem from="1614445683720" duration="1203000" />
       <workItem from="1614492511798" duration="20889000" />
       <workItem from="1614569693192" duration="4566000" />
-      <workItem from="1614595344194" duration="2316000" />
+      <workItem from="1614595344194" duration="3433000" />
+      <workItem from="1614666251215" duration="2640000" />
+      <workItem from="1614673108461" duration="36000" />
     </task>
     <servers />
   </component>
